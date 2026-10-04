@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Image Processing Toolkit</title>
+
+    <!-- Linking external stylesheet for page layout and design -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Importing p5.js library for creative coding (canvas, drawing, video, etc.) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+
+    <!-- Importing ml5.js library for machine learning features (face detection, filters, etc.) -->
+    <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+    
+</head>
+<body>
+    <!-- Main wrapper that holds the gallery (canvas area) and controls -->
+    <div id="app-container">
+
+      
+        
+        <!-- Control panel on the right side with buttons and sliders -->
+        <div id="controls-container">
+
+            <!-- Capture button group -->
+            <div class="control-group">
+                <button id="capture-button">Capture</button>
+            </div>
+
+            <h3>Filter Controls</h3>
+
+            <!-- Threshold sliders for color channels -->
+            <div class="control-group">
+                <label>Red Channel Threshold</label>
+                <div id="slider-red-container"></div>
+            </div>
+            <div class="control-group">
+                <label>Green Channel Threshold</label>
+                <div id="slider-green-container"></div>
+            </div>
+            <div class="control-group">
+                <label>Blue Channel Threshold</label>
+                <div id="slider-blue-container"></div>
+            </div>
+
+            <!-- Chroma key (background removal) threshold slider -->
+            <div class="control-group">
+                 <label>Chroma Key Threshold</label>
+                 <div id="slider-chroma-container"></div>
+            </div>
+
+            <hr>
+
+            <!-- Palette size slider (for quantizing or reducing colors) -->
+            <div class="control-group">
+                <label>Palette Size</label>
+                <div id="slider-palette-container"></div>
+            </div>
+
+            <hr>
+
+            <!-- Additional color model sliders for advanced filters -->
+            <div class="control-group">
+                <label>Color Model 1 Threshold</label>
+                <div id="slider-model1-container"></div>
+            </div>
+            <div class="control-group">
+                <label>Color Model 2 Threshold</label>
+                <div id="slider-model2-container"></div>
+            </div>
+            <h3>Live Mask Controls</h3>
+            <div class="control-group">
+                <label for="mask-selector-dropdown">Choose Your Mask</label>
+                <select id="mask-selector-dropdown" style="width: 100%; margin-top: 5px;">
+                    <option value="visor">Visor</option>
+                    <option value="tribal">Tribal</option>
+                    <option value="glasses">Glasses</option>
+                    <option value="cateye">Cat Eye</option>
+                </select>
+            </div>
+             <div class="control-group">
+                <label>Mask Color</label>
+                <input id="mask-color-picker" type="color" value="#00ffff">
+            </div>
+            <div class="control-group">
+                <label>Mask Opacity</label>
+                <div id="slider-mask-opacity-container"></div>
+            </div>
+            <div class="control-group">
+                <label>Mask Glow</label>
+                <div id="slider-mask-glow-container"></div>
+            </div>
+
+            <!-- Instructions for user interaction -->
+            <div class="instructions">
+                <p><strong>Click the top-left image</strong> to set the Chroma Key color.</p>
+                <p>Press keys <strong>1-4</strong> to change the interactive face filter.</p>
+                <p> 1: Grayscale &nbsp; 2: Blur &nbsp; 3: Color Model &nbsp; 4: Pixelate</p>
+                <p><strong>Smile</strong> to animate the live mask in the bottom-left cell.</p>
+            </div>
+        </div>
+          <!-- Gallery section for showing the p5.js canvas -->
+        <div id="gallery-container">
+            <div id="p5-canvas-container">
+                <!-- Instruction overlay text shown on top of the canvas -->
+                <div id="instruction-overlay">Click to Capture Frame</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Linking external JavaScript files that contain core logic -->
+    <script src="FilterManager.js"></script>
+    <script src="GridManager.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
